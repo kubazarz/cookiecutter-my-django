@@ -1,0 +1,10 @@
+django[bcrypt]>=1.9.5,<1.9.99
+
+# Configuration
+django-environ==0.4.0
+
+# Postgres
+psycopg2==2.6.1
+
+# Models
+django-model-utils==2.5
