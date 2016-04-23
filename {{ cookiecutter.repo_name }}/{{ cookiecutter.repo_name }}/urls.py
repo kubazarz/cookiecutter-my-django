@@ -18,4 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+{% if cookiecutter.use_django_rest_framework == "y" %}
+url(r'^api/', include('api.urls')),
+{% endif %}
 ]
