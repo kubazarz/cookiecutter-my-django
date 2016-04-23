@@ -32,7 +32,9 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-
+{% if cookiecutter.use_django_rest_framework == "y" %}
+    'rest_framework',
+{% endif %}
 ]
 
 PROJECT_APPS = [
@@ -132,4 +134,10 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = str(ROOT_DIR('media'))
 
 MEDIA_URL = '/media/'
-
+{% if cookiecutter.use_django_rest_framework == "y" %}
+# Django REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.CursorPagination',
+    'PAGE_SIZE': 100,
+}
+{% endif %}
