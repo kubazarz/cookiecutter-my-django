@@ -1,4 +1,4 @@
-django[bcrypt]>=1.9.5,<1.9.99
+django[bcrypt]>=1.9.7,<1.9.99
 
 # Configuration
 django-environ==0.4.0
