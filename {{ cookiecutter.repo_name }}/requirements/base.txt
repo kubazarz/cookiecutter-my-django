@@ -1,4 +1,4 @@
-django[bcrypt]>=1.9.7,<1.9.99
+django[bcrypt]>=1.10,<1.10.99
 
 # Configuration
 django-environ==0.4.0
@@ -7,10 +7,10 @@ django-environ==0.4.0
 psycopg2==2.6.1
 
 # Models
-django-model-utils==2.5
+django-model-utils==2.5.1
 
 {% if cookiecutter.use_django_rest_framework == "y" %}
 # Django REST Framework
-djangorestframework==3.3.3
+djangorestframework==3.4.1
 markdown==2.6.6
 {% endif %}
