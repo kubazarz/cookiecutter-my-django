@@ -1,3 +1,3 @@
 -r base.txt
 
-ipython==5.0
+ipython==6.0
