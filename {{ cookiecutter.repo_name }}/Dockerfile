@@ -1,11 +1,13 @@
-FROM python:3.6.1
+FROM python:3.6.5
 ENV PYTHONUNBUFFERED 1
+
+RUN pip install pipenv
 
 RUN mkdir /app
 WORKDIR /app
 
-ADD requirements /app/requirements
-RUN pip install -r requirements/local.txt
+ADD Pipfile Pipfile.lock
+RUN pipenv install --system --deploy
 
 ADD . /app/
 
