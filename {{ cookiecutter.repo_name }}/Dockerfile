@@ -6,7 +6,9 @@ RUN pip install pipenv
 RUN mkdir /app
 WORKDIR /app
 
-ADD Pipfile Pipfile.lock
+ADD Pipfile /app/Pipfile
+ADD Pipfile.lock /app/Pipfile.lock
+
 RUN pipenv install --system --deploy
 
 ADD . /app/
