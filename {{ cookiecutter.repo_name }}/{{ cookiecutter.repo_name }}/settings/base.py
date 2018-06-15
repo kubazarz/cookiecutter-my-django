@@ -26,9 +26,8 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-{% if cookiecutter.use_django_rest_framework == "y" %}
-    'rest_framework',
-{% endif %}
+    'channels',
+    {% if cookiecutter.use_django_rest_framework == "y" %}'rest_framework',{% endif %}
 ]
 
 PROJECT_APPS = [
@@ -37,13 +36,12 @@ PROJECT_APPS = [
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -51,6 +49,8 @@ MIDDLEWARE_CLASSES = [
 ROOT_URLCONF = '{{ cookiecutter.repo_name }}.urls'
 
 WSGI_APPLICATION = '{{ cookiecutter.repo_name }}.wsgi.application'
+
+ASGI_APPLICATION = "{{ cookiecutter.repo_name }}.routing.application"
 
 TEMPLATES = [
     {

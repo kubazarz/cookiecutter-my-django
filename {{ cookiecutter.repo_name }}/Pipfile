@@ -4,13 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = {extras = ["argon2"]}
+django = {extras = ["bcrypt", "argon2"]}
 "psycopg2-binary" = "*"
 django-environ = "*"
 django-model-utils = "*"
 djangorestframework = "*"
 coreapi = "*"
 markdown = "*"
+redis = "*"
+hiredis = "*"
+django-redis = "*"
+channels = "*"
+uvicorn = "*"
 
 [dev-packages]
 ipython = "*"
