@@ -21,6 +21,9 @@ gunicorn = "*"
 [dev-packages]
 ipython = "*"
 pytest-django = "*"
+pytest-mock = "*"
+pytest-factoryboy = "*"
+pytest-faker = "*"
 
 [requires]
 python_version = "3.7"
