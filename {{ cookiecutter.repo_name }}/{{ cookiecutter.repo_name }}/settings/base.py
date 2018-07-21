@@ -77,11 +77,25 @@ DATABASES = {
     'default': env.db('DATABASE_URL'),
 }
 
+# Cache
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": env.str('REDIS_URL'),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor",
+            "PARSER_CLASS": "redis.connection.HiredisParser",
+        }
+    }
+}
+
 # Internationalization
 
-LANGUAGE_CODE = 'pl'
+LANGUAGE_CODE = 'en'
 
-TIME_ZONE = 'Europe/Warsaw'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
