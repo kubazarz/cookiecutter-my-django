@@ -1,7 +1,7 @@
-FROM python:3.6.5
+FROM python:3.7
 ENV PYTHONUNBUFFERED 1
 
-RUN pip install pipenv
+RUN pip install 'pip==18.0' 'pipenv==2018.7.1'
 
 RUN mkdir /app
 WORKDIR /app
