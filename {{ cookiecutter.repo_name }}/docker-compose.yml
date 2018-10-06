@@ -1,14 +1,18 @@
 version: '3'
 services:
   db:
-    image: postgres:10.4-alpine
+    image: postgres:10.5-alpine
     volumes:
       - db_data:/var/lib/postgresql/data
   redis:
-    image: redis:4.0.10-alpine
+    image: redis:4.0.11-alpine
     command: redis-server --appendonly yes
     volumes:
       - redis_data:/data
+  rabbitmq:
+    image: rabbitmq:3.7.8-alpine
+    environment:
+      RABBITMQ_DEFAULT_VHOST: "default"
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -19,6 +23,16 @@ services:
     depends_on:
       - db
       - redis
+      - rabbitmq
+  worker:
+    build: .
+    command: celery -A {{ cookiecutter.repo_name }} worker -l info 
+    volumes:
+     - .:/app
+    depends_on:
+      - db
+      - redis
+      - rabbitmq
 volumes:
   db_data: {}
   redis_data: {}
