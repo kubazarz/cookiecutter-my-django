@@ -17,6 +17,10 @@ django-redis = "*"
 channels = "*"
 uvicorn = "*"
 gunicorn = "*"
+django-cors-headers = "*"
+django-csp = "*"
+pip = "==18"
+celery = {version = "*", extras = ["librabbitmq"]}
 
 [dev-packages]
 ipython = "*"
