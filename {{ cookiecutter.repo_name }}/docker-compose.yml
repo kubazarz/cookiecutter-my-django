@@ -13,26 +13,20 @@ services:
     image: rabbitmq:3.7.8-alpine
     environment:
       RABBITMQ_DEFAULT_VHOST: "default"
-  web:
+  web: &web
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
-    ports:
-      - "8000:8000"
+      - static:/static
     depends_on:
       - db
       - redis
       - rabbitmq
   worker:
-    build: .
+    <<: *web
     command: celery -A {{ cookiecutter.repo_name }} worker -l info 
-    volumes:
-     - .:/app
-    depends_on:
-      - db
-      - redis
-      - rabbitmq
 volumes:
-  db_data: {}
-  redis_data: {}
+  db_data:
+  redis_data:
+  static:
