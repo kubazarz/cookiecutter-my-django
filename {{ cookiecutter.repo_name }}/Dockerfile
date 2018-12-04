@@ -1,4 +1,4 @@
-FROM python:3.7-alpine3.8
+FROM python:3.7.1-alpine3.8
 ENV PYTHONUNBUFFERED 1
 
 RUN apk --no-cache add \
@@ -15,7 +15,7 @@ RUN apk --no-cache add \
     automake \
     tini
 
-RUN pip install 'pip==18.1' 'pipenv==2018.11.14'
+RUN pip install 'pip==18.1' 'pipenv==2018.11.26'
 
 RUN mkdir /app
 WORKDIR /app
