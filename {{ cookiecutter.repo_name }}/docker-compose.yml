@@ -14,17 +14,22 @@ services:
     environment:
       RABBITMQ_DEFAULT_VHOST: "default"
   backend: &backend
-    build: .
+    build: 
+      context: ./backend
+      args:
+        DJANGO_ENV: development
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/app
+      - ./backend:/app
       - static:/static
     depends_on:
       - db
       - redis
       - rabbitmq
+    environment:
+      - ALLOWED_HOSTS=backend,localhost
   celery:
-    <<: *web
+    <<: *backend
     command: celery -A {{ cookiecutter.repo_name }} worker -l info 
 volumes:
   db_data:

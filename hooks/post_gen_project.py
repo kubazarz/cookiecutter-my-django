@@ -6,7 +6,7 @@ PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
 
 def remove_api_module(project_directory):
-    api_module_location = os.path.join(project_directory, 'api')
+    api_module_location = os.path.join(project_directory, 'backend/api')
     shutil.rmtree(api_module_location)
 
 
