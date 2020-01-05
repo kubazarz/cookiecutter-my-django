@@ -1,5 +1,10 @@
-FROM python:3.7.1-alpine3.8
-ENV PYTHONUNBUFFERED 1
+FROM python:3.8.1-alpine3.11
+
+ARG DJANGO_ENV
+
+ENV PYTHONUNBUFFERED=1 \
+    DJANGO_ENV=${DJANGO_ENV} \
+    POETRY_VERSION=1.0.0
 
 RUN apk --no-cache add \
     build-base \
@@ -13,22 +18,22 @@ RUN apk --no-cache add \
     cmake \
     autoconf \
     automake \
-    tini
-
-RUN pip install 'pip==18.1' 'pipenv==2018.11.26'
+    tini \
+ && pip install "poetry==$POETRY_VERSION"
 
 RUN mkdir /app
 WORKDIR /app
 
-ADD Pipfile /app/Pipfile
-ADD Pipfile.lock /app/Pipfile.lock
+COPY poetry.lock pyproject.toml /app/
 
-RUN pipenv install --system --deploy
-
-ADD . /app/
+RUN poetry config virtualenvs.create false \
+ && poetry install $(test "$DJANGO_ENV" == production && echo "--no-dev") --no-root
 
 COPY ./docker/django/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 COPY ./docker/django/uvicorn.sh /uvicorn.sh
 RUN chmod +x /uvicorn.sh
+
+ADD . /app/
+
 ENTRYPOINT ["/sbin/tini", "--", "/entrypoint.sh"]
